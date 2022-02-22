@@ -10,11 +10,19 @@ Receive
 5. Consumer
 Purchase
 
-Below is the representation of activity and state changes on the workflow:
+### High level design representation of the workflow:
 
+#### Activity Diagram:
 ![activity diagram](images/activity.drawio.png)
 
+#### State Diagram:
 ![state diagram](images/state.drawio.png)
+
+#### Sequence Diagram:
+![sequence diagram](images/sequence.drawio.png)
+
+#### Class Diagram:
+![class diagram](images/class.drawio.png)
 
 ### Supply Chain Contract
 https://rinkeby.etherscan.io/address/0x4561576e82e54c47e0768407aa528a2f95dd3dba
