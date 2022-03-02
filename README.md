@@ -10,6 +10,23 @@ Receive
 5. Consumer
 Purchase
 
+### Contracts on Rinkeby:
+1. FarmerRole:
+    Contract Address: 0xf83B374A0AA3B8e01FBa1BA8e6388A9bB661EF7A
+    Transaction hash: 0x7b40db96d87997241de863f2a8818a4ebc3544c2f2c909a65a3b47e968c829dd
+2. DistributorRole:
+    Contract Address: 0x85B8E582B00A4d390FC6C6BB0ec5dC1F006c8441
+    Transaction hash: 0x147766524e0368ec9a0485ee3e31e385141380f6a3ba9be8a0a4833196eca090
+3. RetailerRole:
+    Contract Address: 0x6413f302ec142b6ec13C2042f4bb22C62b78D108
+    Transaction hash: 0xbae028585544161d5a6c6d51db9b2712de12c337bf861898f3a849620081292f
+4. ConsumerRole:
+    Contract Address: 0x6391555b3701B31772891510b19464345e34F98e
+    Transaction hash: 0x3af1163f16e6be66748c32942e7df5369b5888c5c890a022560b81ed0d0eceed
+5. SupplyChain:
+    Contract Address: 0xD7D21b7eCcb328d907CA4B7088D11b8819f46A6C
+    Transaction hash: 0x2e95b58895e1d0f4da5c3fff3781a9f8518d93cfcce004dd2cc31b59806a6f65
+
 ### High level design representation of the workflow:
 
 #### Activity Diagram:
@@ -23,9 +40,6 @@ Purchase
 
 #### Class Diagram:
 ![class diagram](images/class.drawio.png)
-
-### Supply Chain Contract
-https://rinkeby.etherscan.io/address/0x4561576e82e54c47e0768407aa528a2f95dd3dba
 
 ### Libraries used the project:
 1. Node.js
