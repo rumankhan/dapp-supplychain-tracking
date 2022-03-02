@@ -46,7 +46,8 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Harvested by calling function harvestItem()
-        const tx = await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes,{from: ownerID})
+        await supplyChain.addFarmer(originFarmerID);
+        const tx = await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes,{from: originFarmerID})
         // Watch the emitted event Harvested()
         const { logs } = tx;
         const log = logs[0];
@@ -58,7 +59,7 @@ contract('SupplyChain', function(accounts) {
         // Verify the result set
         assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
         assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
+        assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID')
         assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
         assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
         assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
@@ -100,7 +101,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Packed by calling function packItem()
-        const tx = await supplyChain.packItem(upc)
+        const tx = await supplyChain.packItem(upc, {from: originFarmerID})
         // Watch the emitted event Packed()
         const { logs } = tx;
         const log = logs[0];
@@ -119,7 +120,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as ForSale by calling function sellItem()
-        const tx = await supplyChain.sellItem(upc,1)
+        const tx = await supplyChain.sellItem(upc,1, {from: originFarmerID})
         // Watch the emitted event ForSale()
         const { logs } = tx;
         const log = logs[0];
@@ -139,6 +140,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Sold by calling function buyItem()
+        await supplyChain.addDistributor(distributorID);
         const tx = await supplyChain.buyItem(upc, {from: distributorID, value: 1})
         // Watch the emitted event Sold()
         const { logs } = tx;
@@ -159,7 +161,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
 
         // Mark an item as Shipped by calling function shipItem()
-        const tx = await supplyChain.shipItem(upc)
+        const tx = await supplyChain.shipItem(upc,{from: distributorID})
         // Watch the emitted event Sold()
         const { logs } = tx;
         const log = logs[0];
@@ -179,6 +181,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Received by calling function receiveItem()
+        await supplyChain.addRetailer(retailerID);
         const tx = await supplyChain.receiveItem(upc,{from: retailerID})
         // Watch the emitted event Sold()
         const { logs } = tx;
@@ -198,6 +201,7 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Mark an item as Sold by calling function purchaseItem()
+        await supplyChain.addConsumer(consumerID);
         const tx = await supplyChain.purchaseItem(upc,{from: consumerID})
         // Watch the emitted event Sold()
         const { logs } = tx;
